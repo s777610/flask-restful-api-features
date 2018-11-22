@@ -2,6 +2,7 @@ from flask import request, url_for
 from requests import Response
 from db import db
 from libs.mailgun import Mailgun
+from models.confirmation import ConfirmationModel
 
 class UserModel(db.Model):
     __tablename__ = "users"
@@ -13,7 +14,16 @@ class UserModel(db.Model):
     username = db.Column(db.String(80), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), nullable=False, unique=True)
-    activated = db.Column(db.Boolean, default=False)
+    
+    # lazy="dynamic", not get confirmation from db when create UserModel
+    # cascade="all, delete-orphan", whenever delete a user, also delete all confirmation related to that user
+    confirmation = db.relationship(
+        "ConfirmationModel", lazy="dynamic", cascade="all, delete-orphan"
+    )
+
+    @property
+    def most_recent_confirmation(self) -> "ConfirmationModel":
+        return self.confirmation.order_by(db.desc(ConfirmationModel.expire_at)).first()
 
     """
     # we don't need it because nullable=False for username and password
