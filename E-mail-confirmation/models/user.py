@@ -54,7 +54,10 @@ class UserModel(db.Model):
         "userconfirm" is UserConfirm resources 
         url_for("userconfirm", user_id=self.id) is /user_confirm/1 for example
         link is http://127.0.0.1:5000/user_confirm/1  """
-        link = request.url_root[0:-1] + url_for("userconfirm", user_id=self.id)
+        
+        link = request.url_root[0:-1] + url_for(
+            "confirmation", confirmation_id=self.most_recent_confirmation.id
+        )
         subject = "Registration confirmation"
         text = f"Please click the link to confirm your registration: {link}"
         html = f'<html>Please click the link to confirm your registration: <a href="{link}">{link}</a></html>'

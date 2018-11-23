@@ -11,7 +11,7 @@ class ConfirmationModel(db.Model):
     # id is token, so is string
     id = db.Column(db.String(50), primary_key=True)
     # store time as int is simpler
-    expire_at = db.Column(db.Interger, nullable=False) 
+    expire_at = db.Column(db.Integer, nullable=False) 
     confirmed = db.Column(db.Boolean, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     # this is not stored in db, it is calculated after the model is loaded
