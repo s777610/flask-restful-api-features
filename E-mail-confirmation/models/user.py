@@ -65,7 +65,6 @@ class UserModel(db.Model):
         return Mailgun.send_email([self.email], subject, text, html)
         
         
-
     def save_to_db(self) -> None:
         db.session.add(self)
         db.session.commit()

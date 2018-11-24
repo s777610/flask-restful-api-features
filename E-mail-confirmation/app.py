@@ -55,8 +55,8 @@ api.add_resource(User, "/user/<int:user_id>")
 api.add_resource(UserLogin, "/login")
 api.add_resource(TokenRefresh, "/refresh")
 api.add_resource(UserLogout, "/logout")
-# make get request to URL to activate account, and return html to tell user account is confirmed
-api.add_resource(Confirmation, "/user_confirmation/<string:confirmation_id>") 
+# making get request to a URL to activate account, and return html to tell user account is confirmed
+api.add_resource(Confirmation, "/user_confirmation/<string:confirmation_id>") # this link will be sent to
 api.add_resource(ConfirmationByUser, "/confirmation/user/<int:user_id>")
 
 if __name__ == "__main__":

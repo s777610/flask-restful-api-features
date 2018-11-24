@@ -1,0 +1,31 @@
+{
+    "mailgun_failed_load_api_key": "無法載入 MailGun API key",
+    "mailgun_failed_load_domain": "無法載入 MailGun 域名",
+    "mailgun_error_send_email": "無法傳送認證郵件, 用戶註冊失敗",
+  
+    "confirmation_not_found": "查無認證",
+    "confirmation_link_expired": "認證地址過期",
+    "confirmation_already_confirmed": "註冊已被認證",
+    "confirmation_resend_fail": "伺服器錯誤,無法再次傳送認證郵件",
+    "confirmation_resend_successful": "已成功再次寄送認證郵件",
+  
+    "item_name_exists": "商品 '{}' 已經存在",
+    "item_error_inserting": "增加商品中發生錯誤",
+    "item_not_found": "查無此商品",
+    "item_deleted": "刪除商品.",
+  
+    "store_name_exists": "A 商店 '{}' 已經存在",
+    "store_error_inserting": "增加商店中發生錯誤.",
+    "store_not_found": "查無此商店",
+    "store_deleted": "刪除商店",
+  
+    "user_username_exists": "此使用者名稱已經存在",
+    "user_email_exists": "此郵件已經存在",
+    "user_not_found": "查無此使用者",
+    "user_deleted": "使用者刪除",
+    "user_invalid_credentials": "無效的憑據",
+    "user_logged_out": "使用者 <id={}> 成功刪除",
+    "user_not_confirmed": "你還沒認證註冊, 請檢查信箱 <{}>.",
+    "user_error_creating": "伺服器錯誤, 無法創建使用者",
+    "user_registered": "帳號已被創建, 激活帳號網址已被寄到信箱"
+  }
