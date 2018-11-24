@@ -1,6 +1,6 @@
 # flask-restful-api-features
 
-# ** 1 .Email-Confirmation, i18n, l10n**
+# 1 .Email-Confirmation, i18n, l10n
 ## Email-Confirmation
 The user will get a confirmation email after registering. Then, the user has to click the link inside the email in order to activate the account. It also provides a way to re-send email if the confirmation expires.<br>
 ## Internationalization (i18n)
