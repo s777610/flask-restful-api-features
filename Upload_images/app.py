@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from marshmallow import ValidationError
-import os
+from dotenv import load_dotenv
 
 from db import db
 from ma import ma
@@ -13,18 +13,17 @@ from resources.store import Store, StoreList
 from resources.confirmation import Confirmation, ConfirmationByUser
 
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["PROPAGATE_EXCEPTIONS"] = True
-app.config["JWT_BLACKLIST_ENABLED"] = True  # enable blacklist feature
-app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = [
-    "access",
-    "refresh",
-]  # allow blacklisting for access and refresh tokens
-app.config["JWT_SECRET_KEY"] = os.environ.get("APP_SECRET_KEY")
-# we can also use app.secret_key like before, Flask-JWT-Extended can recognize both
 
+app = Flask(__name__)
+"""that the .env file is loaded automatically for you,
+But it is loaded when you start your app in if __name__ == "__main__":.
+here, the .env file is not yet loaded.
+because our config file depends on the .env file being loaded,
+we do need to load it manually. """
+load_dotenv(".env", verbose=True)
+app.config.from_object("default_config")
+# we can change APPLICATION_SETTINGS in .env depending on developing or deploying
+app.config.from_envvar("APPLICATION_SETTINGS") # this can overwrite the config
 api = Api(app)
 
 

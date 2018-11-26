@@ -5,7 +5,7 @@ from models.user import UserModel
 
 class UserSchema(ma.ModelSchema):
     class Meta:
-        model = UserModel
+        model = UserModel #  come from flask marshmallow
         load_only = ("password",)
         dump_only = ("id", "confirmation")
 
