@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from marshmallow import ValidationError
+from flask_uploads import configure_uploads, patch_request_class
 from dotenv import load_dotenv
 
 from db import db
@@ -11,11 +12,13 @@ from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogo
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from resources.confirmation import Confirmation, ConfirmationByUser
+from resources.image import ImageUpload, Image, AvatarUpload, Avatar
+from libs.image_helper import IMAGE_SET
 
 
 
 app = Flask(__name__)
-"""that the .env file is loaded automatically for you,
+"""the .env file is loaded automatically for you,
 But it is loaded when you start your app in if __name__ == "__main__":.
 here, the .env file is not yet loaded.
 because our config file depends on the .env file being loaded,
@@ -24,6 +27,8 @@ load_dotenv(".env", verbose=True)
 app.config.from_object("default_config")
 # we can change APPLICATION_SETTINGS in .env depending on developing or deploying
 app.config.from_envvar("APPLICATION_SETTINGS") # this can overwrite the config
+patch_request_class(app, 10 * 1024 * 1024) #10MB max size upload
+configure_uploads(app, IMAGE_SET)
 api = Api(app)
 
 
@@ -57,8 +62,12 @@ api.add_resource(TokenRefresh, "/refresh")
 api.add_resource(UserLogout, "/logout")
 api.add_resource(Confirmation, "/user_confirm/<string:confirmation_id>")
 api.add_resource(ConfirmationByUser, "/confirmation/user/<int:user_id>")
+api.add_resource(ImageUpload, "/upload/image")
+api.add_resource(Image, "/image/<string:filename>")
+api.add_resource(AvatarUpload, "/upload/avatar") # don't need filename because we always overwrite filename
+api.add_resource(Avatar, "/avatar/<int:user_id>")
 
 if __name__ == "__main__":
     db.init_app(app)
     ma.init_app(app)
-    app.run(port=5000, debug=True)
+    app.run(port=5000)

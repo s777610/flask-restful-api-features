@@ -8,7 +8,7 @@ from flask_uploads import UploadSet, IMAGES
 
 
 # An “upload set” is a single collection of files. You just declare them in the code:
-# set name and allowed extensions
+# IMAGES set name and allowed extensions, "images" is where to store images
 IMAGE_SET = UploadSet("images", IMAGES) # IMAGES is a collcetion of allowed extensions
 
 
