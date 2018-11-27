@@ -14,21 +14,39 @@ Allow clients to store images into database via post HTTP requests. Then, it als
 
 ## 3 .Database-Migrations
 Migration is very powerful tool, which can manage and alter your database. It tracks the records of a database, so that all you have to do is upgrade or downgrade your database. In short, users can store many versions of records for database.
+
 ### Start using migration
-1. Go to the folder where contain app.py, create migrations folder 
+1. Go to the folder where contain app.py, create migrations folder.
 ```
 flask db init
 ```
-2. Create all tables, it generates versions file inside migrations folder. 
+
+2. Create a script inside versions folder, which is inside migrations folder. That script contains code for creating table. In addition, you can add comments for that.
 ```
-flask db migrate
+flask db migrate -m "comments"
 ```
-3. After checking the script inside the versions folder, create the tables.
+
+3. After checking the script inside the versions folder, you can create the tables, upgrade the database, and so on. remember to modify the python script to specify constraint name.
 ```
-flask db upgrade
+flask db upgrade 
 ```
-4. Check the current version of database, run sql query
+
+4. If you want to check the current version of database, run sql query
 ```
 SELECT * FROM alembic_version;
 ```
+
+5. Run this command in order to downgrade database, remember to modify the python script to match name constraint.
+```
+flask db downgrade
+```
+
+6. If you want to add a new column in the existing table, modify the code in the models for adding a new column and run this command.
+```
+flask db migrate -m "add new column in a table"
+flask db upgrade
+```
+
+### Note:
+Modifying code -> flask db migrate -m "comments" -> Checking script -> flask db upgrade
 
