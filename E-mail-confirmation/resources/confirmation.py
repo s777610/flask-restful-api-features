@@ -65,14 +65,14 @@ class ConfirmationByUser(Resource):
         """
         user = UserModel.find_by_id(user_id)
         if not user:
-            return {"message": USER_NOT_FOUND}, 404
+            return {"message": gettext("user_not_found")}, 404
 
         try:
             # find the most current confirmation for the user
             confirmation = user.most_recent_confirmation  # using property decorator
             if confirmation:
                 if confirmation.confirmed:
-                    return {"message": ALREADY_CONFIRMED}, 400
+                    return {"message": gettext("confirmation_already_confirmed")}, 400
                 confirmation.force_to_expire()
 
             new_confirmation = ConfirmationModel(user_id)  # create a new confirmation
