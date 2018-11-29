@@ -52,7 +52,8 @@ Modifying code -> flask db migrate -m "comments" -> Checking script -> flask db 
 
 
 ## 3 .OAuth 2.0
-OAuth is a way to login with a third party. All you have to do is to get the users to tell them that they want to login via your application. Then, your application has to tell them that you have got enough information from the user.
+ OAuth is a way to log in with a third party. In this case, I use Github API to implement this functionality. First of all, users click the login with Github button in the front end. Then, the client(application) asks API to ask users to authorize the client. The way of asking if users want to authorize the client is sending users to Github page. After authorizing, users would be sent back to the client's redirect URI. The redirect URI contains a code, which is unique to the interaction. After that, the client sends the code and secret information to Github. Therefore, Github knows the client is a real application with those two pieces of information. Then, Github sends access token to the client. Once the client got the token, it can make requests with that token in order to get information of users as long as the client specified that it wants to be able to retrieve this information at first.
+
 
 ### Roles of OAuth 2.0
 - User:
@@ -65,7 +66,7 @@ They are companies such as Google, Facebook, Github, and so on. In charge of pro
 Client is our application, which wants access to user accounts. However, users have to authorize that access before we access. After that, the API has to validate the authorization. 
 
 ### Authorization callback URL:
-Where the users will be sent back to after users ahve authorized our application.
+Where the users will be sent back to after users have authorized our application.
 
 ### Client ID:
 This is a public identifier that users know about.
