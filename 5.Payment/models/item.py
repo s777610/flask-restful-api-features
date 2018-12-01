@@ -1,6 +1,6 @@
 from typing import List
-
 from db import db
+
 
 
 class ItemModel(db.Model):
@@ -13,9 +13,16 @@ class ItemModel(db.Model):
     store_id = db.Column(db.Integer, db.ForeignKey("stores.id"), nullable=False)
     store = db.relationship("StoreModel")
 
+    # we can do that, but we don't care those information
+    # orders = db.relationship("OrderModel", secondary=items_to_orders, lazy="dynamic")
+
     @classmethod
     def find_by_name(cls, name: str) -> "ItemModel":
         return cls.query.filter_by(name=name).first()
+
+    @classmethod
+    def find_by_id(cls, _id: int) -> "ItemModel":
+        return cls.query.filter_by(id=_id).first()
 
     @classmethod
     def find_all(cls) -> List["ItemModel"]:
