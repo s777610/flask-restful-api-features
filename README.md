@@ -77,4 +77,4 @@ This would be used for sending post requests to Authorization/Resource Server. I
 
 
 ## 5 .Payment with Stripe
-Implement payment functionality with [Stripe API.](http://www.quora.com/Adam-DAngelo) Stripe collects customer’s payment information. Then, it returns a representative token with other order information in our API. On our API, we expect to get the token and order information from the request body. Then, we can construct an order and talk to Stripe API to make a charge by sending POST request to Stripe API.
+Implement payment functionality with [Stripe API.](https://stripe.com/) Stripe collects customer’s payment information. Then, it returns a representative token with other order information in our API. On our API, we expect to get the token and order information from the request body. Then, we can construct an order and talk to Stripe API to make a charge by sending POST request to Stripe API.
